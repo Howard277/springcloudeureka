@@ -1,0 +1,63 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.1.RELEASE'
+	}
+    // 这里主要添加spring-boot的插件的仓库
+    repositories {
+        maven {url "https://repo.spring.io/libs-release"}
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+// 使用插件
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+// 打包成jar包，最终的jar包名次是baseName+version
+jar {
+    baseName = "spring-cloud-eureka-service"
+    version = '1.0'
+}
+
+// 添加仓库
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {url "https://repo.spring.io/libs-release"}
+}
+
+// 添加依赖
+dependencies {
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '1.4.1.RELEASE'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.3.RELEASE'
+
+  
+	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka-server
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka-server', version: '1.3.0.RELEASE'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2
+	// compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '1.5.3.RELEASE'
+	
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.5.0'
+	
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.5.0'
+	
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
+	
+	
+}
+
+task wrapper(type: Wrapper) {
+	// 根据系统中gradle版本确定
+    gradleVersion = '3.5'
+}

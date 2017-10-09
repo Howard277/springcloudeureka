@@ -1,0 +1,11 @@
+server:
+  port: 8020
+
+spring:
+  application:
+    name: spring-cloud-euraka-service  #应用程序名称用于客户端识别应用使用，不能随意修改
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: ${default:http://localhost:8000/eureka/,http://localhost:8001/eureka/}  #支持JVM动态修改

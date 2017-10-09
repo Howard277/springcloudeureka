@@ -1,0 +1,5 @@
+spring cloud eureka作为微服务的注册中心演示程序。
+
+1、spring-cloud-eureka-server程序作为注册中心，可以启动多个，相互之间进行注册。
+2、spring-cloud-eureka-service是微服务提供程序。可以启动多个程序来增强服务处理能力，每一个示例都注册到所有Eureka的注册中心。
+3、spring-cloud-eureka-client程序是微服务的消费者程序，通过config包下的RestTemplateConfig类中配置的具有负载均衡能力的RestTemplat调用Eureka上注册的服务。

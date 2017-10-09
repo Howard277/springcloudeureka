@@ -1,0 +1,40 @@
+server:
+  port: 8000 #默认端口8000，可以在JVM参数中修改用于集群部署
+
+spring:
+  application:
+    name: spring-cloud-eureka-server
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/
+      
+# 两台Eureka服务器互相注册
+---
+spring:
+  application:
+    name: spring-cloud-eureka-server
+  profiles: peer1
+server:
+  port: 8000
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/,http://localhost:8001/eureka/
+---
+spring:
+  application:
+    name: spring-cloud-eureka-server
+  profiles: peer2
+server:
+  port: 8001
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/,http://localhost:8001/eureka/
